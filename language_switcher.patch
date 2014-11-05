@@ -1,0 +1,16 @@
+diff --git a/civicrm.module b/civicrm.module
+index adf42ec..68000c7 100644
+--- a/civicrm.module
++++ b/civicrm.module
+@@ -839,6 +839,11 @@ function civicrm_theme_registry_alter(&$theme_registry) {
+     // Now add it on at the end of the array so that it runs last.
+     $theme_registry['page']['preprocess functions'][] = 'civicrm_preprocess_page';
+   }
++
++  // Allow rewrite of theme_links__locale_block from this module, as it is not a theme modification.
++  $path = drupal_get_path('module', 'civicrm');
++  $theme_registry['links__locale_block']['theme path'] = $path;
++  $theme_registry['links__locale_block']['function'] = 'civicrm_languageswitcher_links__locale_block';
+ }
+ 
+ /**
